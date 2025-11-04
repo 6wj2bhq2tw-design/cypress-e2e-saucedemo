@@ -2,12 +2,14 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Git Auto Commit & Push (PowerShell)",
+      "label": "Git Auto Commit & Push (Script)",
       "type": "shell",
       "command": "powershell",
       "args": [
-        "-Command",
-        "git add .; git commit -m \"auto commit\"; git push"
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\git-auto.ps1"
       ],
       "presentation": {
         "echo": true,
