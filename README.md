@@ -11,8 +11,8 @@
 - ✅ 테스트 결과 자동 리포트
 
 ## 🧰 기술 스택
-- Cypress 15
-- Node.js 20
+- Cypress
+- Node.js 
 - GitHub Actions
 - VSCode
 
