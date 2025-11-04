@@ -2,8 +2,7 @@
 
 ## 프로젝트 개요  
 이 프로젝트는 [SauceDemo](https://www.saucedemo.com/) 사이트를 대상으로 한 **엔드투엔드(E2E) 자동화 테스트**입니다.  
-Cypress를 이용해 주요 사용자 시나리오를 자동으로 검증하고,  
-GitHub Actions를 통해 코드가 변경될 때마다 테스트가 자동 실행되도록 설정했습니다.  
+Cypress를 이용해 주요 사용자 시나리오를 자동으로 검증하고, GitHub Actions를 통해 코드가 변경될 때마다 테스트가 자동 실행되도록 설정했습니다.  
 
 ---
 
@@ -19,10 +18,10 @@ GitHub Actions를 통해 코드가 변경될 때마다 테스트가 자동 실�
 ## 사용 기술  
 | 구분 | 내용 |
 |------|------|
-| 테스트 프레임워크 | Cypress 15.5.0 |
+| 테스트 프레임워크 | Cypress|
 | CI/CD | GitHub Actions |
 | 언어 | JavaScript (Node.js 20) |
-| 브라우저 | Chrome (headless) |
+| 브라우저 | Chrome|
 
 ---
 
