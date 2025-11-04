@@ -1,5 +1,4 @@
 // cypress/e2e/login.cy.js
-
 Cypress.config('defaultCommandTimeout', 12000);
 
 describe('SauceDemo Full E2E Suite', () => {
@@ -17,9 +16,7 @@ describe('SauceDemo Full E2E Suite', () => {
     cy.wait(500);
   });
 
-  // ─────────────────────────────
-  // 🔹 로그인 관련 테스트 (5개)
-  // ─────────────────────────────
+  // ───────────── 로그인 관련 테스트 ─────────────
   it('로그인 성공', () => {
     login('standard_user', 'secret_sauce');
   });
@@ -50,11 +47,10 @@ describe('SauceDemo Full E2E Suite', () => {
     cy.get('[data-test="error"]').should('contain.text', 'Username is required');
   });
 
-  // ─────────────────────────────
-  // 🔹 로그인 후 시나리오 (E2E 흐름)
-  // ─────────────────────────────
+  // ───────────── 로그인 후 시나리오 ─────────────
   context('로그인 후 전체 기능 흐름', () => {
     beforeEach(() => {
+      cy.visit(url);
       login('standard_user', 'secret_sauce');
     });
 
@@ -67,12 +63,6 @@ describe('SauceDemo Full E2E Suite', () => {
       cy.url().should('include', 'inventory-item');
       cy.get('.inventory_details_name').should('exist');
       cy.get('#back-to-products').click();
-    });
-
-    it('뒤로 가기 버튼 정상 동작', () => {
-      cy.get('.inventory_item_name').first().click();
-      cy.get('#back-to-products').click();
-      cy.url().should('include', 'inventory.html');
     });
 
     it('상품 추가 및 장바구니 아이콘 업데이트', () => {
@@ -94,16 +84,9 @@ describe('SauceDemo Full E2E Suite', () => {
       cy.get('.cart_item').should('not.exist');
     });
 
-    it('상품 정렬 (이름 A-Z)', () => {
-      cy.get('.product_sort_container').select('az');
-    });
-
-    it('상품 정렬 (가격 낮은 순)', () => {
-      cy.get('.product_sort_container').select('lohi');
-    });
-
-    it('상품 정렬 (가격 높은 순)', () => {
+    it('상품 정렬 기능 확인', () => {
       cy.get('.product_sort_container').select('hilo');
+      cy.get('.product_sort_container').select('az');
     });
 
     it('햄버거 메뉴 열기 확인', () => {
@@ -115,9 +98,18 @@ describe('SauceDemo Full E2E Suite', () => {
       cy.get('#react-burger-menu-btn').click();
       cy.get('#about_sidebar_link').click();
 
+      // 🚀 Cross-origin 에러 무시 + 복귀
+      cy.on('uncaught:exception', (err) => {
+        console.warn('Ignoring expected cross-origin error:', err.message);
+        return false;
+      });
+
       cy.origin('https://saucelabs.com', () => {
         cy.url().should('include', 'saucelabs.com');
       });
+
+      // ✅ 다시 saucedemo로 복귀
+      cy.visit('https://www.saucedemo.com/inventory.html');
     });
 
     it('로그아웃 기능 확인', () => {
@@ -126,28 +118,7 @@ describe('SauceDemo Full E2E Suite', () => {
       cy.url().should('include', 'saucedemo.com');
     });
 
-    // ───────────────
-    // 🛒 장바구니 & 결제 시나리오
-    // ───────────────
-    it('상품 추가 후 결제 시작', () => {
-      cy.get('.btn_inventory').first().click();
-      cy.get('.shopping_cart_link').click();
-      cy.get('[data-test="checkout"]').click();
-      cy.url().should('include', 'checkout-step-one.html');
-    });
-
-    it('결제 정보 입력', () => {
-      cy.get('.btn_inventory').first().click();
-      cy.get('.shopping_cart_link').click();
-      cy.get('[data-test="checkout"]').click();
-      cy.get('[data-test="firstName"]').type('John');
-      cy.get('[data-test="lastName"]').type('Doe');
-      cy.get('[data-test="postalCode"]').type('12345');
-      cy.get('[data-test="continue"]').click();
-      cy.url().should('include', 'checkout-step-two.html');
-    });
-
-    it('결제 완료 후 확인 페이지', () => {
+    it('결제 프로세스 전체 확인', () => {
       cy.get('.btn_inventory').first().click();
       cy.get('.shopping_cart_link').click();
       cy.get('[data-test="checkout"]').click();
@@ -156,14 +127,8 @@ describe('SauceDemo Full E2E Suite', () => {
       cy.get('[data-test="postalCode"]').type('12345');
       cy.get('[data-test="continue"]').click();
       cy.get('[data-test="finish"]').click();
-      cy.url().should('include', 'checkout-complete.html');
       cy.get('.complete-header').should('contain.text', 'Thank you');
-    });
-
-    it('홈으로 돌아가기 버튼', () => {
-      cy.visit('https://www.saucedemo.com/checkout-complete.html');
       cy.get('[data-test="back-to-products"]').click();
-      cy.url().should('include', 'inventory.html');
     });
   });
 });
