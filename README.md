@@ -1,21 +1,28 @@
-﻿# 🧪 Cypress E2E Test - SauceDemo
+﻿# 🧪 Cypress E2E Automation for SauceDemo
 
-자동화 테스트 포트폴리오 프로젝트입니다.  
-Cypress를 사용해 [SauceDemo](https://www.saucedemo.com/) 로그인 기능을 E2E 방식으로 테스트합니다.
+## 📌 프로젝트 개요
+이 프로젝트는 [SauceDemo](https://www.saucedemo.com/) 사이트를 대상으로
+회원 로그인 및 상품 구매 흐름을 Cypress로 자동화한 E2E 테스트입니다.
 
----
+## 🚀 주요 기능
+- ✅ 로그인 성공/실패 시나리오
+- ✅ 상품 장바구니 추가 및 결제 플로우
+- ✅ GitHub Actions CI 연동
+- ✅ 테스트 결과 자동 리포트
 
-## 🚀 기능 요약
-- ✅ 로그인 성공 시 inventory 페이지 이동 확인  
-- ❌ 잘못된 비밀번호 입력 시 오류 메시지 검증  
-- 📸 자동 스크린샷 및 영상 저장  
-- ⚙️ GitHub Actions로 CI/CD 자동 테스트 수행  
-
----
+## 🧰 기술 스택
+- Cypress 15
+- Node.js 20
+- GitHub Actions
+- VSCode
 
 ## 🧩 실행 방법
-`ash
+```bash
+# 설치
 npm install
-npx cypress open
+
+# 로컬 테스트 실행
 npx cypress run
 
+# 브라우저 GUI 모드 실행
+npx cypress open
