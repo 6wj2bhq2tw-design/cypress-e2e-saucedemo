@@ -63,7 +63,7 @@ Cypress를 사용하여 사용자 주요 시나리오를 자동화하고, **GitH
 
 | 구분 | 이미지 |
 |------|--------|
-| **Cypress 실행 화면** | ![Cypress 실행 화면](https://github.com/사용자명/저장소명/blob/main/assets/cypress-run.png) |
-| **GitHub Actions 로그 화면** | ![GitHub Actions 로그 화면](https://github.com/사용자명/저장소명/blob/main/assets/github-actions-log.png) |
+| **Cypress 실행 화면** | ![Cypress 실행 화면](https://github.com/6wj2bhq2tw-design/cypress-e2e-saucedemo/blob/main/assets/cypress-run.png?raw=true) |
+| **GitHub Actions 로그 화면** | ![GitHub Actions 로그 화면](https://github.com/6wj2bhq2tw-design/cypress-e2e-saucedemo/blob/main/assets/github-actions-log.png?raw=true) |
 
 > 테스트 실행 결과는 `cypress/videos/` 및 `cypress/screenshots/` 폴더에 자동으로 저장됩니다.
